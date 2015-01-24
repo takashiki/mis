@@ -1,5 +1,5 @@
 <?php
-use mis\Model;
+use mis\core\Model;
 
 class UserModel extends Model 
 {

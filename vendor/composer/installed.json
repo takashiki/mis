@@ -1,0 +1,55 @@
+[
+    {
+        "name": "takashiki/misphp",
+        "version": "dev-master",
+        "version_normalized": "9999999-dev",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/takashiki/MisPHP.git",
+            "reference": "9421bfe40a24724c1d202eae52f507cf4ce14f62",
+            "mirrors": [
+                {
+                    "url": "/%package%/%normalizedUrl%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/takashiki/MisPHP/zipball/9421bfe40a24724c1d202eae52f507cf4ce14f62",
+            "reference": "9421bfe40a24724c1d202eae52f507cf4ce14f62",
+            "shasum": "",
+            "mirrors": [
+                {
+                    "url": "http://pkg.phpcomposer.com/repo/packagist/dists/%package%/%version%/%reference%.%type%",
+                    "preferred": true
+                }
+            ]
+        },
+        "require": {
+            "php": ">=5.3.0"
+        },
+        "time": "2015-01-24 08:13:57",
+        "type": "library",
+        "installation-source": "source",
+        "autoload": {
+            "psr-4": {
+                "mis\\": "./"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "takashiki",
+                "email": "857995137@qq.com",
+                "homepage": "http://qxblog.sinaapp.com",
+                "role": "A Developer"
+            }
+        ],
+        "description": "MisPHP is a simple php framework",
+        "homepage": "http://qxblog.sinaapp.com"
+    }
+]

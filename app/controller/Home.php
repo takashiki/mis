@@ -1,6 +1,6 @@
 <?php
-use mis\Controller;
-use mis\View;
+use mis\core\Controller;
+use mis\core\View;
 
 class Home extends Controller
 {
