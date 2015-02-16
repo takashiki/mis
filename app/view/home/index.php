@@ -1,29 +1,12 @@
-<!DOCTYPE html>
+{extends=common/frame}
 
-<html lang="en">
+{section=content}
 
-<head>
+<h1>这是内容</h1>
+<?php echo $content ?>
 
-  <meta charset="UTF-8">
+{/section}
 
-  <title><?php echo $title ?></title>
-
-</head>
-
-<body>
-
-  <div class="article">
-
-    <h1><?php echo $title ?></h1>
-
-    <div class="content">
-
-      <?php echo $content ?>
-
-    </div>
-
-  </div>
-
-</body>
-
-</html>
+{section=test}
+test
+{/section}

@@ -1,22 +1,13 @@
 <?php
-if (defined('SAE_MYSQL_USER')) {
-  return array(
-    'db_type' => 'mysql',
-    'server' => 'SAE_MYSQL_HOST_M',
-    'port' => 'SAE_MYSQL_PORT',
-    'username' => 'SAE_MYSQL_USER',
-    'password' => 'SAE_MYSQL_PASS',
-    'db_name' => 'SAE_MYSQL_DB',
-    'charset' => 'utf8'
-  );
-
-} else {
-  return array(
-    'db_type' => 'mysql',
-    'server' => 'localhost',
-    'username' => 'root',
-    'password' => '123456',
-    'db_name' => 'mis',
-    'charset' => 'utf8'
-  );
-}
+return array(
+  'driver' => 'mysql',
+  'host' => env('SAE_MYSQL_HOST_M', 'localhost'),
+  'port' => env('SAE_MYSQL_PORT', '3306'),
+  'username' => env('SAE_MYSQL_USER', 'root'),
+  'password' => env('SAE_MYSQL_PASS', '123456'),
+  'database' => env('SAE_MYSQL_DB', 'mis'),
+  'charset' => 'utf8',
+  'collation' => 'utf8_unicode_ci',
+  'prefix'    => '',
+  'strict'    => false
+);
