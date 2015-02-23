@@ -8,6 +8,6 @@ return array(
   'database' => env('SAE_MYSQL_DB', 'mis'),
   'charset' => 'utf8',
   'collation' => 'utf8_unicode_ci',
-  'prefix'    => '',
+  'prefix'    => 'mis_',
   'strict'    => false
 );
