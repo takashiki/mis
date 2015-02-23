@@ -12,4 +12,9 @@ $app->route('notFound', function() {
 
 //$app->route('/', function() {echo 'null';});
 
+/* function home() {
+  echo 'welcome';
+}
+$app->route('/', 'home'); */
+
 $app->run();
