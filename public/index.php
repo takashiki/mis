@@ -1,8 +1,15 @@
 <?php
-require_once '../mis/autoloader.php';
+error_reporting(E_ALL);
+define('APP', realpath('/../app/'));
 
-use mis\Mis;
+require_once '/../vendor/autoload.php';
 
-$app = new Mis();
+$app = new mis\Mis();
+
+$app->route('notFound', function() {
+    echo 'rewrite 404';
+});
+
+$app->route('/', function() {echo 'welcome';});
 
 $app->run();

@@ -1,23 +1,22 @@
 {
   "name": "takashiki/misdemo",
   "description": "MisDemo is a skeleton app based on MisPHP",
-  "homepage": "http://qxblog.sinaapp.com",
+  "homepage": "http://blog.skyx.in",
   "license": "MIT",
   "authors": [
     {
       "name": "takashiki",
       "email": "857995137@qq.com",
-      "homepage": "http://qxblog.sinaapp.com",
-      "role": "A Developer"
+      "homepage": "http://blog.skyx.in",
+      "role": "coder & acger"
     }
   ],
   "require": {
     "takashiki/misphp": "dev-master"
   },
   "autoload": {
-    "classmap": [
-      "app/controller",
-      "app/model"
-    ]
+    "psr-4": {
+      "app\\": "app/"
+    }
   }
 }
