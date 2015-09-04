@@ -1,6 +1,6 @@
 {
-  "name": "takashiki/misdemo",
-  "description": "MisDemo is a skeleton app based on MisPHP",
+  "name": "takashiki/mis",
+  "description": "Mis is a micro php framework",
   "homepage": "http://blog.skyx.in",
   "license": "MIT",
   "authors": [
@@ -12,11 +12,13 @@
     }
   ],
   "require": {
-    "takashiki/misphp": "dev-master"
+    "php": ">=5.5.9",
+    "ext-mbstring": "*",
+    "ext-openssl": "*"
   },
   "autoload": {
     "psr-4": {
-      "app\\": "app/"
+      "mis\\": "src/"
     }
   }
 }

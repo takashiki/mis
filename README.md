@@ -1,3 +1,7 @@
-#MisPHP (Skeleton)
+# Mis Framework
 
-参考flight、slim、fatfree、b2core、MoePress等微框架
+又一次抛弃之前的设想，重新构思而开始动工的版本，这次主要参考Yii2、Laravel、Slim3等。
+
+目前的设想，构建一个di容器，其他所有组件使用开源方案实现，使用该框架可以在不修改框架本身源码的基础上定制框架所有组件，实现一个真Glue框架。
+
+本框架的目标为快速开发，需要组件时可随时Attach。
