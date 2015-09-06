@@ -3,6 +3,8 @@
   "description": "Mis is a micro php framework",
   "homepage": "http://blog.skyx.in",
   "license": "MIT",
+  "keywords": ["mis", "framework"],
+  "version": "0.1.0",
   "authors": [
     {
       "name": "takashiki",
