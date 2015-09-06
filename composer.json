@@ -1,25 +1,25 @@
 {
-  "name": "takashiki/mis",
-  "description": "Mis is a micro php framework",
-  "homepage": "http://blog.skyx.in",
-  "license": "MIT",
-  "keywords": ["mis", "framework"],
-  "version": "0.1.0",
-  "authors": [
-    {
-      "name": "takashiki",
-      "email": "857995137@qq.com",
-      "homepage": "http://blog.skyx.in",
-      "role": "coder & acger"
+    "name": "takashiki/mis",
+    "description": "Mis is a micro php framework",
+    "homepage": "http://blog.skyx.in",
+    "license": "MIT",
+    "keywords": ["mis", "framework"],
+    "authors": [
+        {
+            "name": "takashiki",
+            "email": "857995137@qq.com",
+            "homepage": "http://blog.skyx.in",
+            "role": "coder & acger"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "container-interop/container-interop": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "mis\\": "src/"
+        },
+        "files": ["src/Mis.php"]
     }
-  ],
-  "require": {
-    "php": ">=5.5.9",
-    "container-interop/container-interop": "^1.1"
-  },
-  "autoload": {
-    "psr-4": {
-      "mis\\": "src/"
-    }
-  }
 }
