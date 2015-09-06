@@ -13,8 +13,7 @@
   ],
   "require": {
     "php": ">=5.5.9",
-    "ext-mbstring": "*",
-    "ext-openssl": "*"
+    "container-interop/container-interop": "^1.1"
   },
   "autoload": {
     "psr-4": {
