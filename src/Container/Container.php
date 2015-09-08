@@ -7,7 +7,7 @@ use Mis\Container\Exception\NotFoundException;
 
 class Container extends PimpleContainer implements ContainerInterface
 {
-    public function __construct(array $settings)
+    public function __construct()
     {
         parent::__construct();
     }
