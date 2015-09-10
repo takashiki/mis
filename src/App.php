@@ -15,15 +15,19 @@ class App
      */
     private $container;
 
+    /**
+     * @param array $settings
+     * @param null|Mis\Container\ContainerInterface $container
+     */
     public function __construct($settings = [], $container = null)
     {
         Mis::$app = $this;
+
         if ($container === null) {
             $container = new Container();
         } elseif (!$container instanceof ContainerInterface) {
             throw new InvalidArgumentException('Expected a ContainerInterface');
         }
-
         $this->container = $container;
 
         $this->init($settings);
@@ -45,6 +49,23 @@ class App
     }
 
     protected function init($settings)
+    {
+        $this->parseSettings($settings);
+
+        $this->registerBasicServices();
+    }
+
+    protected function parseSettings($settings = [])
+    {
+
+    }
+
+    protected function registerBasicServices()
+    {
+
+    }
+
+    public function run()
     {
 
     }
