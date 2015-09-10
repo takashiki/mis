@@ -12,36 +12,9 @@ class Mis
     const VERSION = '0.1.0';
 
     /**
-     * Container
+     * Application
      *
-     * @var ContainerInterface
+     * @var Mis\App
      */
-    private $container;
-
-    public function __construct($container = null)
-    {
-        if (!$container) $container = new Container();
-        if (!$container instanceof ContainerInterface) {
-            throw new InvalidArgumentException('Expected a ContainerInterface');
-        }
-
-        $this->container = $container;
-    }
-
-    public function __get($name)
-    {
-        return $this->container->get($name);
-    }
-
-    public function __set($name, $value)
-    {
-        return $this->container->set($name, $value);
-    }
-
-    public function __isset($name)
-    {
-        return $this->container->has($name);
-    }
-
-
+    public static $app;
 }
