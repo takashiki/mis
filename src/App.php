@@ -52,17 +52,17 @@ class App
     {
         $this->parseSettings($settings);
 
-        $this->registerBasicServices();
+        $this->registerServices();
     }
 
     protected function parseSettings($settings = [])
     {
-
+        $this->container->set('settings', $settings);
     }
 
-    protected function registerBasicServices()
+    protected function registerServices()
     {
-
+        $this->container->get('');
     }
 
     public function run()
