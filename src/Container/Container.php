@@ -15,7 +15,7 @@ class Container extends PimpleContainer implements ContainerInterface
     public function get($id)
     {
         if (!$this->offsetExists($id)) {
-            throw new NotFoundException("'{$id}'未定义");
+            throw new NotFoundException("'{$id}' is not defined");
         }
         return $this->offsetGet($id);
     }
