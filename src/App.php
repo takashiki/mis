@@ -1,22 +1,23 @@
 <?php
+
 namespace Mis;
 
-use Mis;
-use Mis\Container\ContainerInterface;
-use Mis\Container\Container;
 use InvalidArgumentException;
+use Mis;
+use Mis\Container\Container;
+use Mis\Container\ContainerInterface;
 
 class App
 {
     /**
-     * Container
+     * Container.
      *
      * @var ContainerInterface
      */
     private $container;
 
     /**
-     * @param array $config
+     * @param array                                 $config
      * @param null|Mis\Container\ContainerInterface $container
      */
     public function __construct($config = [], $container = null)
@@ -25,7 +26,7 @@ class App
 
         if ($container === null) {
             $container = new Container();
-        } elseif (! $container instanceof ContainerInterface) {
+        } elseif (!$container instanceof ContainerInterface) {
             throw new InvalidArgumentException('Expected a ContainerInterface.');
         }
         $this->container = $container;
@@ -64,14 +65,13 @@ class App
 
     protected function registerBaseComponents()
     {
-
     }
 
     /**
-     * Add GET route
+     * Add GET route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -81,10 +81,10 @@ class App
     }
 
     /**
-     * Add POST route
+     * Add POST route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -94,10 +94,10 @@ class App
     }
 
     /**
-     * Add PUT route
+     * Add PUT route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -107,10 +107,10 @@ class App
     }
 
     /**
-     * Add PATCH route
+     * Add PATCH route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -120,10 +120,10 @@ class App
     }
 
     /**
-     * Add DELETE route
+     * Add DELETE route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -133,10 +133,10 @@ class App
     }
 
     /**
-     * Add OPTIONS route
+     * Add OPTIONS route.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -146,10 +146,10 @@ class App
     }
 
     /**
-     * Add route for any HTTP method
+     * Add route for any HTTP method.
      *
-     * @param  string $pattern  The route URI pattern
-     * @param  mixed  $callable The route callback routine
+     * @param string $pattern  The route URI pattern
+     * @param mixed  $callable The route callback routine
      *
      * @return \Slim\Interfaces\RouteInterface
      */
@@ -159,11 +159,11 @@ class App
     }
 
     /**
-     * Add route with multiple methods
+     * Add route with multiple methods.
      *
-     * @param  string[] $methods  Numeric array of HTTP method names
-     * @param  string   $pattern  The route URI pattern
-     * @param  mixed    $callable The route callback routine
+     * @param string[] $methods  Numeric array of HTTP method names
+     * @param string   $pattern  The route URI pattern
+     * @param mixed    $callable The route callback routine
      *
      * @return RouteInterface
      */
@@ -187,7 +187,7 @@ class App
     }
 
     /**
-     * Route Groups
+     * Route Groups.
      *
      * This method accepts a route pattern and a callback. All route
      * declarations in the callback will be prepended by the group(s)
@@ -205,11 +205,11 @@ class App
         $group->setContainer($this->container);
         $group($this);
         $this->container->get('router')->popGroup();
+
         return $group;
     }
 
     public function run()
     {
-
     }
 }

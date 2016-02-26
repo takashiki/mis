@@ -1,25 +1,26 @@
 <?php
 /**
- * Slim Framework (http://slimframework.com)
+ * Slim Framework (http://slimframework.com).
  *
  * @link      https://github.com/codeguy/Slim
+ *
  * @copyright Copyright (c) 2011-2015 Josh Lockhart
  * @license   https://github.com/codeguy/Slim/blob/master/LICENSE (MIT License)
  */
 namespace Mis\Routing;
 
-use InvalidArgumentException;
-use RuntimeException;
-use Psr\Http\Message\ServerRequestInterface;
-use FastRoute\RouteCollector;
-use FastRoute\RouteParser;
-use FastRoute\RouteParser\Std as StdParser;
 use FastRoute\DataGenerator;
 use FastRoute\DataGenerator\GroupCountBased as GroupCountBasedGenerator;
 use FastRoute\Dispatcher\GroupCountBased as GroupCountBasedDispatcher;
+use FastRoute\RouteCollector;
+use FastRoute\RouteParser;
+use FastRoute\RouteParser\Std as StdParser;
+use InvalidArgumentException;
+use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 
 /**
- * Router
+ * Router.
  *
  * This class organizes Mis application route objects. It is responsible
  * for registering route objects, assigning names to route objects,
@@ -29,28 +30,28 @@ use FastRoute\Dispatcher\GroupCountBased as GroupCountBasedDispatcher;
 class Router extends RouteCollector implements RouterInterface
 {
     /**
-     * Parser
+     * Parser.
      *
      * @var \FastRoute\RouteParser
      */
     private $routeParser;
 
     /**
-     * Routes
+     * Routes.
      *
      * @var Route[]
      */
     protected $routes = [];
 
     /**
-     * Named routes
+     * Named routes.
      *
      * @var null|Route[]
      */
     protected $namedRoutes;
 
     /**
-     * Route groups
+     * Route groups.
      *
      * @var RouteGroup[]
      */
@@ -59,29 +60,29 @@ class Router extends RouteCollector implements RouterInterface
     private $finalized = false;
 
     /**
-     * Create new router
+     * Create new router.
      *
      * @param RouteParser   $parser
      * @param DataGenerator $generator
      */
     public function __construct(RouteParser $parser = null, DataGenerator $generator = null)
     {
-        $parser = $parser ? $parser : new StdParser;
-        $generator = $generator ? $generator : new GroupCountBasedGenerator;
+        $parser = $parser ? $parser : new StdParser();
+        $generator = $generator ? $generator : new GroupCountBasedGenerator();
         parent::__construct($parser, $generator);
         $this->routeParser = $parser;
     }
 
     /**
-     * Add route
+     * Add route.
      *
-     * @param  string[] $methods Array of HTTP methods
-     * @param  string   $pattern The route pattern
-     * @param  callable $handler The route callable
-     *
-     * @return RouteInterface
+     * @param string[] $methods Array of HTTP methods
+     * @param string   $pattern The route pattern
+     * @param callable $handler The route callable
      *
      * @throws InvalidArgumentException if the route pattern isn't a string
+     *
+     * @return RouteInterface
      */
     public function map($methods, $pattern, $handler)
     {
@@ -91,7 +92,7 @@ class Router extends RouteCollector implements RouterInterface
 
         // Prepend parent group pattern(s)
         if ($this->routeGroups) {
-            $pattern = $this->processGroups() . $pattern;
+            $pattern = $this->processGroups().$pattern;
         }
 
         // Add route
@@ -102,7 +103,7 @@ class Router extends RouteCollector implements RouterInterface
     }
 
     /**
-     * Finalize registered routes in preparation for dispatching
+     * Finalize registered routes in preparation for dispatching.
      *
      * NOTE: The routes can only be finalized once.
      */
@@ -118,9 +119,9 @@ class Router extends RouteCollector implements RouterInterface
     }
 
     /**
-     * Dispatch router for HTTP request
+     * Dispatch router for HTTP request.
      *
-     * @param  ServerRequestInterface $request The current HTTP request object
+     * @param ServerRequestInterface $request The current HTTP request object
      *
      * @return array
      *
@@ -131,13 +132,13 @@ class Router extends RouteCollector implements RouterInterface
         $this->finalize();
 
         $dispatcher = new GroupCountBasedDispatcher($this->getData());
-        $uri = '/' . ltrim($request->getUri()->getPath(), '/');
+        $uri = '/'.ltrim($request->getUri()->getPath(), '/');
 
         return $dispatcher->dispatch($request->getMethod(), $uri);
     }
 
     /**
-     * Get route objects
+     * Get route objects.
      *
      * @return Route[]
      */
@@ -147,13 +148,13 @@ class Router extends RouteCollector implements RouterInterface
     }
 
     /**
-     * Get named route object
+     * Get named route object.
      *
-     * @param string $name        Route name
+     * @param string $name Route name
+     *
+     * @throws RuntimeException If named route does not exist
      *
      * @return Route
-     *
-     * @throws RuntimeException   If named route does not exist
      */
     public function getNamedRoute($name)
     {
@@ -161,27 +162,29 @@ class Router extends RouteCollector implements RouterInterface
             $this->buildNameIndex();
         }
         if (!isset($this->namedRoutes[$name])) {
-            throw new RuntimeException('Named route does not exist for name: ' . $name);
+            throw new RuntimeException('Named route does not exist for name: '.$name);
         }
+
         return $this->namedRoutes[$name];
     }
 
     /**
-     * Process route groups
+     * Process route groups.
      *
      * @return string A group pattern to prefix routes with
      */
     protected function processGroups()
     {
-        $pattern = "";
+        $pattern = '';
         foreach ($this->routeGroups as $group) {
             $pattern .= $group->getPattern();
         }
+
         return $pattern;
     }
 
     /**
-     * Add a route group to the array
+     * Add a route group to the array.
      *
      * @param string   $pattern
      * @param callable $callable
@@ -192,31 +195,33 @@ class Router extends RouteCollector implements RouterInterface
     {
         $group = new RouteGroup($pattern, $callable);
         array_push($this->routeGroups, $group);
+
         return $group;
     }
 
     /**
-     * Removes the last route group from the array
+     * Removes the last route group from the array.
      *
      * @return RouteGroup|bool The RouteGroup if successful, else False
      */
     public function popGroup()
     {
         $group = array_pop($this->routeGroups);
+
         return $group instanceof RouteGroup ? $group : false;
     }
 
     /**
-     * Build the path for a named route
+     * Build the path for a named route.
      *
      * @param string $name        Route name
      * @param array  $data        Named argument replacement data
      * @param array  $queryParams Optional query string parameters
      *
-     * @return string
-     *
      * @throws RuntimeException         If named route does not exist
      * @throws InvalidArgumentException If required data not provided
+     *
+     * @return string
      */
     public function pathFor($name, array $data = [], array $queryParams = [])
     {
@@ -240,7 +245,7 @@ class Router extends RouteCollector implements RouterInterface
                 }
 
                 // This segment has a parameter: first element is the name
-                if (! array_key_exists($item[0], $data)) {
+                if (!array_key_exists($item[0], $data)) {
                     // we don't have a data element for this segment: cancel
                     // testing this routeData item, so that we can try a less
                     // specific routeData item.
@@ -258,12 +263,12 @@ class Router extends RouteCollector implements RouterInterface
         }
 
         if (empty($segments)) {
-            throw new InvalidArgumentException('Missing data for URL segment: ' . $segmentName);
+            throw new InvalidArgumentException('Missing data for URL segment: '.$segmentName);
         }
         $url = implode('', $segments);
 
         if ($queryParams) {
-            $url .= '?' . http_build_query($queryParams);
+            $url .= '?'.http_build_query($queryParams);
         }
 
         return $url;
@@ -278,19 +283,20 @@ class Router extends RouteCollector implements RouterInterface
      * @param array  $data        Named argument replacement data
      * @param array  $queryParams Optional query string parameters
      *
-     * @return string
-     *
      * @throws RuntimeException         If named route does not exist
      * @throws InvalidArgumentException If required data not provided
+     *
+     * @return string
      */
     public function urlFor($name, array $data = [], array $queryParams = [])
     {
         trigger_error('urlFor() is deprecated. Use pathFor() instead.', E_USER_DEPRECATED);
+
         return $this->pathFor($name, $data, $queryParams);
     }
 
     /**
-     * Build index of named routes
+     * Build index of named routes.
      */
     protected function buildNameIndex()
     {

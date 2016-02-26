@@ -1,76 +1,77 @@
 <?php
+
 namespace Mis\Routing;
 
 use Closure;
 use Exception;
 use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Route
+ * Route.
  */
 class Route extends Routable implements RouteInterface
 {
     /**
-     * HTTP methods supported by this route
+     * HTTP methods supported by this route.
      *
      * @var string[]
      */
     protected $methods = [];
 
     /**
-     * Route name
+     * Route name.
      *
      * @var null|string
      */
     protected $name;
 
     /**
-     * Parent route groups
+     * Parent route groups.
      *
      * @var RouteGroup[]
      */
     protected $groups;
 
     /**
-     * Output buffering mode
+     * Output buffering mode.
      *
      * One of: false, 'prepend' or 'append'
      *
-     * @var boolean|string
+     * @var bool|string
      */
     protected $outputBuffering = 'append';
 
     /**
-     * Route parameters
+     * Route parameters.
      *
      * @var array
      */
     protected $arguments = [];
 
     /**
-     * Create new route
+     * Create new route.
      *
-     * @param string[]     $methods The route HTTP methods
-     * @param string       $pattern The route pattern
+     * @param string[]     $methods  The route HTTP methods
+     * @param string       $pattern  The route pattern
      * @param callable     $callable The route callable
-     * @param RouteGroup[] $groups The parent route groups
+     * @param RouteGroup[] $groups   The parent route groups
      */
     public function __construct($methods, $pattern, $callable, $groups = [])
     {
-        $this->methods  = $methods;
-        $this->pattern  = $pattern;
+        $this->methods = $methods;
+        $this->pattern = $pattern;
         $this->callable = $callable;
-        $this->groups   = $groups;
+        $this->groups = $groups;
     }
 
     /**
-     * Add middleware
+     * Add middleware.
      *
      * This method prepends new middleware to the route's middleware stack.
      *
-     * @param  mixed    $callable The callback routine
+     * @param mixed $callable The callback routine
      *
      * @return RouteInterface
      */
@@ -82,11 +83,12 @@ class Route extends Routable implements RouteInterface
         }
 
         $this->middleware[] = $callable;
+
         return $this;
     }
 
     /**
-     * Finalize the route in preparation for dispatching
+     * Finalize the route in preparation for dispatching.
      */
     public function finalize()
     {
@@ -101,7 +103,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Get route callable
+     * Get route callable.
      *
      * @return callable
      */
@@ -111,7 +113,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Get route methods
+     * Get route methods.
      *
      * @return string[]
      */
@@ -121,7 +123,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Get parent route groups
+     * Get parent route groups.
      *
      * @return RouteGroup[]
      */
@@ -131,7 +133,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Get route name
+     * Get route name.
      *
      * @return null|string
      */
@@ -141,9 +143,9 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Get output buffering mode
+     * Get output buffering mode.
      *
-     * @return boolean|string
+     * @return bool|string
      */
     public function getOutputBuffering()
     {
@@ -151,11 +153,11 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Set output buffering mode
+     * Set output buffering mode.
      *
      * One of: false, 'prepend' or 'append'
      *
-     * @param boolean|string $mode
+     * @param bool|string $mode
      *
      * @throws InvalidArgumentException If an unknown buffering mode is specified
      */
@@ -168,13 +170,13 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Set route name
+     * Set route name.
      *
      * @param string $name
      *
-     * @return self
-     *
      * @throws InvalidArgumentException if the route name is not a string
+     *
+     * @return self
      */
     public function setName($name)
     {
@@ -182,11 +184,12 @@ class Route extends Routable implements RouteInterface
             throw new InvalidArgumentException('Route name must be a string');
         }
         $this->name = $name;
+
         return $this;
     }
 
     /**
-     * Set a route argument
+     * Set a route argument.
      *
      * @param string $name
      * @param string $value
@@ -196,11 +199,12 @@ class Route extends Routable implements RouteInterface
     public function setArgument($name, $value)
     {
         $this->arguments[$name] = $value;
+
         return $this;
     }
 
     /**
-     * Replace route arguments
+     * Replace route arguments.
      *
      * @param array $arguments
      *
@@ -209,11 +213,12 @@ class Route extends Routable implements RouteInterface
     public function setArguments(array $arguments)
     {
         $this->arguments = $arguments;
+
         return $this;
     }
 
     /**
-     * Retrieve route arguments
+     * Retrieve route arguments.
      *
      * @return array
      */
@@ -223,10 +228,10 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Retrieve a specific route argument
+     * Retrieve a specific route argument.
      *
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */
@@ -235,6 +240,7 @@ class Route extends Routable implements RouteInterface
         if (array_key_exists($name, $this->arguments)) {
             return $this->arguments[$name];
         }
+
         return $default;
     }
 
@@ -243,10 +249,10 @@ class Route extends Routable implements RouteInterface
      *******************************************************************************/
 
     /**
-     * Prepare the route for use
+     * Prepare the route for use.
      *
      * @param ServerRequestInterface $request
-     * @param array $arguments
+     * @param array                  $arguments
      */
     public function prepare(ServerRequestInterface $request, array $arguments)
     {
@@ -257,7 +263,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Run route
+     * Run route.
      *
      * This method traverses the middleware stack, including the route's callable
      * and captures the resultant HTTP response object. It then sends the response
@@ -275,7 +281,7 @@ class Route extends Routable implements RouteInterface
     }
 
     /**
-     * Dispatch route callable against current Request and Response objects
+     * Dispatch route callable against current Request and Response objects.
      *
      * This method invokes the route object's callable. If middleware is
      * registered for the route, each callable middleware is invoked in
@@ -283,8 +289,10 @@ class Route extends Routable implements RouteInterface
      *
      * @param ServerRequestInterface $request  The current Request object
      * @param ResponseInterface      $response The current Response object
+     *
+     * @throws \Exception if the route callable throws an exception
+     *
      * @return \Psr\Http\Message\ResponseInterface
-     * @throws \Exception  if the route callable throws an exception
      */
     public function __invoke(ServerRequestInterface $request, ResponseInterface $response)
     {
@@ -317,7 +325,7 @@ class Route extends Routable implements RouteInterface
             if ($this->outputBuffering === 'prepend') {
                 // prepend output buffer content
                 $body = new Http\Body(fopen('php://temp', 'r+'));
-                $body->write($output . $response->getBody());
+                $body->write($output.$response->getBody());
                 $response = $response->withBody($body);
             } elseif ($this->outputBuffering === 'append') {
                 // append output buffer content

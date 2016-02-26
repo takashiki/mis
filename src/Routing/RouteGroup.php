@@ -1,18 +1,17 @@
 <?php
+
 namespace Mis\Routing;
 
 use Closure;
 use Mis\App;
 
 /**
- * A collector for Routable objects with a common middleware stack
- *
- * @package Mis
+ * A collector for Routable objects with a common middleware stack.
  */
 class RouteGroup extends Routable implements RouteGroupInterface
 {
     /**
-     * Create a new RouteGroup
+     * Create a new RouteGroup.
      *
      * @param string   $pattern  The pattern prefix for the group
      * @param callable $callable The group callable
@@ -24,7 +23,7 @@ class RouteGroup extends Routable implements RouteGroupInterface
     }
 
     /**
-     * Prepend middleware to the group middleware collection
+     * Prepend middleware to the group middleware collection.
      *
      * @param mixed $callable The callback routine
      *

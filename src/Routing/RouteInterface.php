@@ -1,52 +1,51 @@
 <?php
+
 namespace Mis\Routing;
 
 use InvalidArgumentException;
-use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 /**
- * Route Interface
+ * Route Interface.
  *
- * @package Mis
  * @since   0.0.1
  */
 interface RouteInterface
 {
-
     /**
-     * Retrieve a specific route argument
+     * Retrieve a specific route argument.
      *
      * @param string $name
-     * @param mixed $default
+     * @param mixed  $default
      *
      * @return mixed
      */
     public function getArgument($name, $default = null);
 
     /**
-     * Get route arguments
+     * Get route arguments.
      *
      * @return array
      */
     public function getArguments();
 
     /**
-     * Get route name
+     * Get route name.
      *
      * @return null|string
      */
     public function getName();
 
     /**
-     * Get route pattern
+     * Get route pattern.
      *
      * @return string
      */
     public function getPattern();
 
     /**
-     * Set a route argument
+     * Set a route argument.
      *
      * @param string $name
      * @param string $value
@@ -56,7 +55,7 @@ interface RouteInterface
     public function setArgument($name, $value);
 
     /**
-     * Replace route arguments
+     * Replace route arguments.
      *
      * @param array $arguments
      *
@@ -65,25 +64,26 @@ interface RouteInterface
     public function setArguments(array $arguments);
 
     /**
-     * Set route name
+     * Set route name.
      *
      * @param string $name
      *
-     * @return static
      * @throws InvalidArgumentException if the route name is not a string
+     *
+     * @return static
      */
     public function setName($name);
 
     /**
-     * Prepare the route for use
+     * Prepare the route for use.
      *
      * @param ServerRequestInterface $request
-     * @param array $arguments
+     * @param array                  $arguments
      */
     public function prepare(ServerRequestInterface $request, array $arguments);
 
     /**
-     * Dispatch route callable against current Request and Response objects
+     * Dispatch route callable against current Request and Response objects.
      *
      * This method invokes the route object's callable. If middleware is
      * registered for the route, each callable middleware is invoked in

@@ -1,10 +1,10 @@
 <?php
+
 namespace Mis\Container\Exception;
 
-use RuntimeException;
 use Interop\Container\Exception\ContainerException as ContainerExceptionInterface;
+use RuntimeException;
 
 class ContainerException extends RuntimeException implements ContainerExceptionInterface
 {
-
 }
