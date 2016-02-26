@@ -1,46 +1,46 @@
 <?php
+
 namespace Mis\Routing;
 
 use Mis\Container\ContainerInterface;
 
 /**
- * A routable, middleware-aware object
+ * A routable, middleware-aware object.
  *
- * @package Mis
  * @since   0.0.1
  */
 abstract class Routable
 {
     /**
-     * Route callable
+     * Route callable.
      *
      * @var callable
      */
     protected $callable;
 
     /**
-     * Container
+     * Container.
      *
      * @var ContainerInterface
      */
     protected $container;
 
     /**
-     * Route middleware
+     * Route middleware.
      *
      * @var callable[]
      */
     protected $middleware = [];
 
     /**
-     * Route pattern
+     * Route pattern.
      *
      * @var string
      */
     protected $pattern;
 
     /**
-     * Get the middleware registered for the group
+     * Get the middleware registered for the group.
      *
      * @return callable[]
      */
@@ -50,7 +50,7 @@ abstract class Routable
     }
 
     /**
-     * Get the route pattern
+     * Get the route pattern.
      *
      * @return string
      */
@@ -60,7 +60,7 @@ abstract class Routable
     }
 
     /**
-     * Set container for use with resolveCallable
+     * Set container for use with resolveCallable.
      *
      * @param ContainerInterface $container
      *
@@ -69,6 +69,7 @@ abstract class Routable
     public function setContainer(ContainerInterface $container)
     {
         $this->container = $container;
+
         return $this;
     }
 }

@@ -1,20 +1,20 @@
 <?php
+
 namespace Mis\Routing;
 
-use RuntimeException;
 use InvalidArgumentException;
 use Psr\Http\Message\ServerRequestInterface;
+use RuntimeException;
 
 /**
- * Router Interface
+ * Router Interface.
  *
- * @package Mis
  * @since   0.0.1
  */
 interface RouterInterface
 {
     /**
-     * Add route
+     * Add route.
      *
      * @param string[] $methods Array of HTTP methods
      * @param string   $pattern The route pattern
@@ -25,9 +25,9 @@ interface RouterInterface
     public function map($methods, $pattern, $handler);
 
     /**
-     * Dispatch router for HTTP request
+     * Dispatch router for HTTP request.
      *
-     * @param  ServerRequestInterface $request The current HTTP request object
+     * @param ServerRequestInterface $request The current HTTP request object
      *
      * @return array
      *
@@ -36,9 +36,9 @@ interface RouterInterface
     public function dispatch(ServerRequestInterface $request);
 
     /**
-     * Add a route group to the array
+     * Add a route group to the array.
      *
-     * @param string   $pattern The group pattern
+     * @param string   $pattern  The group pattern
      * @param callable $callable A group callable
      *
      * @return RouteGroup
@@ -46,34 +46,34 @@ interface RouterInterface
     public function pushGroup($pattern, $callable);
 
     /**
-     * Removes the last route group from the array
+     * Removes the last route group from the array.
      *
      * @return bool True if successful, else False
      */
     public function popGroup();
 
     /**
-     * Get named route object
+     * Get named route object.
      *
-     * @param string $name        Route name
+     * @param string $name Route name
+     *
+     * @throws RuntimeException If named route does not exist
      *
      * @return Route
-     *
-     * @throws RuntimeException   If named route does not exist
      */
     public function getNamedRoute($name);
 
     /**
-     * Build the path for a named route
+     * Build the path for a named route.
      *
      * @param string $name        Route name
      * @param array  $data        Named argument replacement data
      * @param array  $queryParams Optional query string parameters
      *
-     * @return string
-     *
      * @throws RuntimeException         If named route does not exist
      * @throws InvalidArgumentException If required data not provided
+     *
+     * @return string
      */
     public function pathFor($name, array $data = [], array $queryParams = []);
 }

@@ -1,9 +1,9 @@
 <?php
+
 namespace Mis\Container;
 
-use Pimple\Container as PimpleContainer;
-use Mis\Container\Exception\ContainerException;
 use Mis\Container\Exception\NotFoundException;
+use Pimple\Container as PimpleContainer;
 
 class Container extends PimpleContainer implements ContainerInterface
 {
@@ -17,6 +17,7 @@ class Container extends PimpleContainer implements ContainerInterface
         if (!$this->offsetExists($id)) {
             throw new NotFoundException("'{$id}' is not defined");
         }
+
         return $this->offsetGet($id);
     }
 

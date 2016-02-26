@@ -1,18 +1,17 @@
 <?php
-use Mis\Container\ContainerInterface;
-use Mis\Container\Container;
+
 
 class Mis
 {
     /**
-     * Current version
+     * Current version.
      *
      * @var string
      */
     const VERSION = '0.1.0';
 
     /**
-     * Application
+     * Application.
      *
      * @var Mis\App
      */
